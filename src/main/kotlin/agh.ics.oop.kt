@@ -1,3 +1,12 @@
+class Vector2d constructor(x :Int ,y: Int){
+    var pos_1: Int =x
+    var pos_2: Int =y
+    fun toString(v: Vector2d)
+    {
+        val value: String ="("+v.pos_1.toString()+","+v.pos_2.toString()+")"
+    }
+}
+
 fun run(path: String){
     for (i in path){
         if(!(i.isWhitespace())) {
@@ -13,8 +22,7 @@ fun run(path: String){
 }
 
 fun main(args: Array<String>) {
-    println("Start")
-    val path= readLine().toString()
-    run(path)
-    println("Stop")
+    println("Start!")
+    var v1: Vector2d(2,5)
+
 }
