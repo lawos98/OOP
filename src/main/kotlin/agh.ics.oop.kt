@@ -23,6 +23,6 @@ fun run(path: String){
 
 fun main(args: Array<String>) {
     println("Start!")
-    var v1: Vector2d(2,5)
+    var v1: Vector2d(2,4)
 
 }
