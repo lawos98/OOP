@@ -13,8 +13,8 @@ fun run(path: String){
 }
 
 fun main(args: Array<String>) {
-    println("Start!")
+    println("Start")
     val path= readLine().toString()
     run(path)
-    println("Stop!")
+    println("Stop")
 }
