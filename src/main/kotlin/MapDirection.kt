@@ -1,42 +1,62 @@
 enum class MapDirection() {
-    NORTH,
-    SOUTH,
-    WEST,
-    EAST;
-    fun convertTostring(obj: MapDirection):String
-    {
-        when (obj) {
-            NORTH -> return "Północ"
-            SOUTH -> return "Południe"
-            WEST  -> return "Zachód"
-            EAST -> return "Wschód"
+    NORTH {
+        override fun convertTostring():String{
+            return "Północ"
         }
-    }
-    fun next(obj: MapDirection):MapDirection
-    {
-        when (obj) {
-            NORTH -> return EAST
-            SOUTH -> return WEST
-            WEST  -> return NORTH
-            EAST -> return SOUTH
+        override fun next():MapDirection{
+            return EAST
         }
-    }
-    fun previous(obj: MapDirection):MapDirection
-    {
-        when (obj) {
-            NORTH -> return WEST
-            SOUTH -> return EAST
-            WEST  -> return SOUTH
-            EAST -> return NORTH
+        override fun previous():MapDirection{
+            return WEST
         }
-    }
-    fun toUnitVector(obj: MapDirection):Vector2d
-    {
-        when (obj) {
-            NORTH -> return Vector2d(0,1)
-            SOUTH -> return Vector2d(0,-1)
-            WEST  -> return Vector2d(-1,0)
-            EAST -> return Vector2d(1,0)
+        override fun toUnitVector():Vector2d{
+            return Vector2d(0,1)
         }
-    }
+          },
+    SOUTH{
+        override fun convertTostring():String{
+            return "Południe"
+        }
+        override fun next():MapDirection{
+            return WEST
+        }
+        override fun previous():MapDirection{
+            return EAST
+        }
+        override fun toUnitVector():Vector2d{
+            return Vector2d(0,-1)
+        }
+    },
+    WEST{
+        override fun convertTostring():String{
+            return "Zachód"
+        }
+        override fun next():MapDirection{
+            return NORTH
+        }
+        override fun previous():MapDirection{
+            return SOUTH
+        }
+        override fun toUnitVector():Vector2d{
+            return Vector2d(-1,0)
+        }
+    },
+    EAST{
+        override fun convertTostring():String{
+            return "Wschód"
+        }
+        override fun next():MapDirection{
+            return SOUTH
+        }
+        override fun previous():MapDirection{
+            return NORTH
+        }
+        override fun toUnitVector():Vector2d{
+            return Vector2d(1,0)
+        }
+    };
+    abstract fun convertTostring():String
+    abstract fun next():MapDirection
+    abstract fun previous():MapDirection
+    abstract fun toUnitVector():Vector2d
 }

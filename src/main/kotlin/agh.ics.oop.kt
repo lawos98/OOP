@@ -1,54 +1,4 @@
-import java.lang.NullPointerException
 
-class Vector2d constructor(val x :Int, val y: Int){
-    fun convertToString() :String {
-        return "($x,$y)"
-    }
-    fun precedes(u: Vector2d) :Boolean
-    {
-        if (x <= u.x && y <= u.y)
-        {
-            return true
-        }
-        return false
-    }
-    fun follows(u: Vector2d) :Boolean
-    {
-        if (x >= u.x && y >= u.y)
-        {
-            return true
-        }
-        return false
-    }
-    fun uppperRight(u: Vector2d) :Vector2d
-    {
-        return Vector2d(maxOf(x,u.x),maxOf(y,u.y))
-    }
-    fun lowerLeft(u: Vector2d) :Vector2d
-    {
-        return Vector2d(minOf(x,u.x), minOf(y,u.y))
-    }
-    fun add(u: Vector2d) :Vector2d
-    {
-        return Vector2d(x+u.x,y+u.y)
-    }
-    fun subtract(u: Vector2d) :Vector2d
-    {
-        return Vector2d(x-u.x,y-u.y)
-    }
-    fun equals(u: Vector2d) :Boolean
-    {
-        if (x == u.x && y == u.y)
-        {
-            return true
-        }
-        return false
-    }
-    fun opposite() :Vector2d
-    {
-        return Vector2d(-x,-y)
-    }
-}
 fun convert(arg: Char):String {
     when (arg) {
         'f' -> return "FORWARD"
@@ -71,15 +21,9 @@ fun run(path: String) {
         }
     }
 }
-
-fun main(args: Array<String>) {
+fun main(args:String) {
     println("Start!")
-    val v1=Vector2d(1 ,2)
-    println(v1.convertToString())
-    val v2=Vector2d(-2,1)
-    println(v2.convertToString())
-    println(v1.add(v2).convertToString())
-    run("ff gg bb rr flrb")
+    run(args)
 
 
 }
