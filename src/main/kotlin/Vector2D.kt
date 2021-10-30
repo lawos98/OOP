@@ -1,4 +1,4 @@
-class Vector2d constructor(val x :Int, val y: Int){
+class Vector2d (var x :Int, var y: Int){
     fun convertToString() :String {
         return "($x,$y)"
     }

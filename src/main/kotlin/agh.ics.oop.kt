@@ -1,29 +1,20 @@
 
-fun convert(arg: Char):String {
+fun convertToString(arg:MoveDirection):String{
     when (arg) {
-        'f' -> return "FORWARD"
-        'b' -> return "BACKWARD"
-        'r' -> return "RIGHT"
-        else -> return "LEFT"
+        MoveDirection.FORWARD -> return "zwierzak idzie do przodu"
+        MoveDirection.BACKWARD -> return "zwierzak idzie do tyłu"
+        MoveDirection.RIGHT -> return "zwierzak skręca w prawo"
+        MoveDirection.LEFT -> return "zwierzak skręca w lewo"
     }
 }
-
-fun run(path: String) {
-    for (i in path) {
-        if (i == 'f' || i == 'b' || i == 'r' || i == 'l') {
-            val value = MoveDirection.valueOf(convert(i))
-            when (value) {
-                MoveDirection.FORWARD -> println("zwierzak idzie do przodu")
-                MoveDirection.BACKWARD -> println("zwierzak idzie do tyłu")
-                MoveDirection.RIGHT -> println("zwierzak skręca w prawo")
-                MoveDirection.LEFT -> println("zwierzak skręca w lewo")
-            }
-        }
+fun main(args: Array<String>) {
+    var kon=Animal()
+    var way:Array<MoveDirection> =OptionsParser().parse("frf")
+    println(way.size)
+    for (i in way)
+    {
+        kon.move(i)
+        print(kon.showPlace())
+        println(convertToString(i))
     }
-}
-fun main(args:String) {
-    println("Start!")
-    run(args)
-
-
 }
