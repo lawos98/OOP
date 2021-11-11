@@ -3,16 +3,10 @@ class Vector2d (var x :Int, var y: Int){
         return "($x,$y)"
     }
     fun precedes(u: Vector2d) :Boolean {
-        if (x <= u.x && y <= u.y) {
-            return true
-        }
-        return false
+        return x <= u.x && y <= u.y
     }
     fun follows(u: Vector2d) :Boolean {
-        if (x >= u.x && y >= u.y) {
-            return true
-        }
-        return false
+        return x >= u.x && y >= u.y
     }
     fun uppperRight(u: Vector2d) :Vector2d {
         return Vector2d(maxOf(x,u.x),maxOf(y,u.y))
@@ -20,19 +14,24 @@ class Vector2d (var x :Int, var y: Int){
     fun lowerLeft(u: Vector2d) :Vector2d {
         return Vector2d(minOf(x,u.x), minOf(y,u.y))
     }
-    fun add(u: Vector2d) :Vector2d {
+    operator fun plus(u: Vector2d) :Vector2d {
         return Vector2d(x+u.x,y+u.y)
     }
-    fun subtract(u: Vector2d) :Vector2d {
+    operator fun minus(u: Vector2d) :Vector2d {
         return Vector2d(x-u.x,y-u.y)
     }
-    fun isequals(u: Vector2d) :Boolean {
-        if (x == u.x && y == u.y) {
-            return true
-        }
-        return false
+    override fun equals(other: Any?): Boolean {
+        if(other !is Vector2d)
+            return false
+        return x == other.x && y == other.y
     }
     fun opposite() :Vector2d {
         return Vector2d(-x,-y)
+    }
+
+    override fun hashCode(): Int {
+        var result = x
+        result = 31 * result + y
+        return result
     }
 }

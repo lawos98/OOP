@@ -1,36 +1,26 @@
-import kotlin.math.max
-import kotlin.math.min
-
 class Animal() {
     private var Orientation: MapDirection =MapDirection.NORTH
-    private var Place: Vector2d = Vector2d(2,2)
+    private var Position: Vector2d = Vector2d(2,2)
     fun showPlace():String
     {
-        return Place.convertToString()
+        return Position.convertToString()
     }
     fun isAt(arg: Vector2d,or:MapDirection):Boolean {
-        if(Place.isequals(arg) && or==Orientation){
-            return true
-        }
-        return false
+        return Position==arg && or==Orientation
     }
     fun move(arg:MoveDirection)
     {
         when(arg)
         {
             MoveDirection.FORWARD -> {
-                Place=Place.add(Orientation.toUnitVector())
-                if(Place.x>4)Place.x=4
-                if(Place.x<0)Place.x=0
-                if(Place.y>4)Place.y=4
-                if(Place.y<0)Place.y=0
+                if((Position+Orientation.toUnitVector()).precedes(Vector2d(4,4)) && (Position+Orientation.toUnitVector()).follows(Vector2d(0,0))) {
+                    Position = Position + Orientation.toUnitVector()
+                }
             }
             MoveDirection.BACKWARD -> {
-                Place=Place.subtract(Orientation.toUnitVector())
-                if(Place.x>4)Place.x=4
-                if(Place.x<0)Place.x=0
-                if(Place.y>4)Place.y=4
-                if(Place.y<0)Place.y=0
+                if((Position-Orientation.toUnitVector()).precedes(Vector2d(4,4)) && (Position-Orientation.toUnitVector()).follows(Vector2d(0,0))) {
+                    Position = Position - Orientation.toUnitVector()
+                }
             }
             MoveDirection.LEFT -> Orientation=Orientation.previous()
             MoveDirection.RIGHT -> Orientation=Orientation.next()
