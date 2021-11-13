@@ -1,31 +1,38 @@
-class Animal() {
-    private var Orientation: MapDirection =MapDirection.NORTH
-    private var Position: Vector2d = Vector2d(2,2)
-    fun showPlace():String
-    {
-        return Position.convertToString()
+class Animal(var map: IWorldMap, var initialPosition: Vector2d) {
+    private var orientation: MapDirection = MapDirection.NORTH
+    private var position: Vector2d = initialPosition
+    override fun toString(): String {
+        return when (orientation) {
+            MapDirection.NORTH -> ("⮝")
+            MapDirection.WEST -> ("⮜")
+            MapDirection.SOUTH -> ("⮟")
+            MapDirection.EAST -> ("⮞")
+        }
     }
-    fun isAt(arg: Vector2d,or:MapDirection):Boolean {
-        return Position==arg && or==Orientation
+
+    fun isAt(arg: Vector2d): Boolean {
+        return position == arg
     }
-    fun move(arg:MoveDirection)
-    {
-        when(arg)
-        {
+
+    fun isAtAnimal(creature: Animal): Boolean {
+        return position == creature.position
+    }
+
+    fun move(arg: MoveDirection) {
+        when (arg) {
             MoveDirection.FORWARD -> {
-                if((Position+Orientation.toUnitVector()).precedes(Vector2d(4,4)) && (Position+Orientation.toUnitVector()).follows(Vector2d(0,0))) {
-                    Position = Position + Orientation.toUnitVector()
+                if (map.canMoveTo(position + orientation.toUnitVector())) {
+                    position += orientation.toUnitVector()
                 }
             }
             MoveDirection.BACKWARD -> {
-                if((Position-Orientation.toUnitVector()).precedes(Vector2d(4,4)) && (Position-Orientation.toUnitVector()).follows(Vector2d(0,0))) {
-                    Position = Position - Orientation.toUnitVector()
+                if (map.canMoveTo(position - orientation.toUnitVector())) {
+                    position -= orientation.toUnitVector()
                 }
             }
-            MoveDirection.LEFT -> Orientation=Orientation.previous()
-            MoveDirection.RIGHT -> Orientation=Orientation.next()
+            MoveDirection.LEFT -> orientation = orientation.previous()
+            MoveDirection.RIGHT -> orientation = orientation.next()
 
         }
-
     }
 }

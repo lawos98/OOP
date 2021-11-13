@@ -15,10 +15,10 @@ class Vector2dTest {
     @Test
     fun test_convertToString()
     {
-        assertEquals(Vector2d(2, 4).convertToString(),"(2,4)")
-        assertEquals(Vector2d(3, 1).convertToString(),"(3,1)")
-        assertEquals(Vector2d(-1, -1).convertToString(),"(-1,-1)")
-        assertEquals(Vector2d(-5, 5).convertToString(),"(-5,5)")
+        assertEquals(Vector2d(2, 4).toString(),"(2,4)")
+        assertEquals(Vector2d(3, 1).toString(),"(3,1)")
+        assertEquals(Vector2d(-1, -1).toString(),"(-1,-1)")
+        assertEquals(Vector2d(-5, 5).toString(),"(-5,5)")
     }
     @Test
     fun test_procedes()

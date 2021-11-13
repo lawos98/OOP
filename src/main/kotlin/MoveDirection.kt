@@ -1,4 +1,4 @@
-enum class MoveDirection() {
+enum class MoveDirection {
     FORWARD,
     BACKWARD,
     RIGHT,

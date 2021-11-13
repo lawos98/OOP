@@ -1,4 +1,4 @@
-enum class MapDirection() {
+enum class MapDirection {
     NORTH {
         override fun convertTostring():String{
             return "Północ"

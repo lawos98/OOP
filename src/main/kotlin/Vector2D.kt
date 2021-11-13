@@ -1,5 +1,5 @@
 class Vector2d (var x :Int, var y: Int){
-    fun convertToString() :String {
+    override fun toString() :String {
         return "($x,$y)"
     }
     fun precedes(u: Vector2d) :Boolean {
@@ -20,7 +20,7 @@ class Vector2d (var x :Int, var y: Int){
     operator fun minus(u: Vector2d) :Vector2d {
         return Vector2d(x-u.x,y-u.y)
     }
-    override fun equals(other: Any?): Boolean {
+    override operator fun equals(other: Any?): Boolean {
         if(other !is Vector2d)
             return false
         return x == other.x && y == other.y

@@ -1,5 +1,5 @@
 
-fun convertToString(arg:MoveDirection):String{
+fun toString(arg:MoveDirection):String{
     when (arg) {
         MoveDirection.FORWARD -> return "zwierzak idzie do przodu"
         MoveDirection.BACKWARD -> return "zwierzak idzie do tyłu"
@@ -8,13 +8,13 @@ fun convertToString(arg:MoveDirection):String{
     }
 }
 fun main(args: Array<String>) {
-    var kon=Animal()
-    var way:Array<MoveDirection> =OptionsParser().parse("frf")
-    println(way.size)
-    for (i in way)
-    {
-        kon.move(i)
-        print(kon.showPlace())
-        println(convertToString(i))
-    }
+//    var kon=Animal()
+//    var way:Array<MoveDirection> =OptionsParser().parse("frf")
+//    println(way.size)
+//    for (i in way)
+//    {
+//        kon.move(i)
+//        print(kon.showPlace())
+//        println(convertToString(i))
+//    }
 }
