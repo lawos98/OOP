@@ -4,11 +4,11 @@
  *
  * @author apohllo
  */
-class MapVisualizer
+open class MapVisualizer(private val map: IWorldMap)
 /**
  * Initializes the MapVisualizer with an instance of map to visualize.
  * @param map
- */(private val map: IWorldMap) {
+ */ {
     /**
      * Convert selected region of the map into a string. It is assumed that the
      * indices of the map will have no more than two characters (including the

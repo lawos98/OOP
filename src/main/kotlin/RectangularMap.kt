@@ -1,6 +1,6 @@
 import java.util.LinkedList
 
-class RectangularMap(var width: Int, var height: Int) : IWorldMap {
+class RectangularMap(var width: Int, var height: Int):IWorldMap{
     private var animalList = LinkedList<Animal>()
 
     override fun canMoveTo(position: Vector2d): Boolean {
@@ -23,7 +23,7 @@ class RectangularMap(var width: Int, var height: Int) : IWorldMap {
                 return false
             }
         }
-        animalList.add(animal)
+        animalList.addLast(animal)
         return true
     }
 
@@ -42,11 +42,14 @@ class RectangularMap(var width: Int, var height: Int) : IWorldMap {
     }
 
     override fun animals(): List<Animal> {
-        val tab: List<Animal> = emptyList()
+        val tab= arrayListOf<Animal>()
         for (creature: Animal in animalList){
-            tab.plus(creature)
+            tab.add(creature)
         }
         return tab
+    }
+    override fun toString():String{
+        return MapVisualizer(this).draw(Vector2d(0,0),Vector2d(width,height))
     }
 }
 

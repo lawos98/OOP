@@ -1,4 +1,4 @@
-class Animal(var map: IWorldMap, var initialPosition: Vector2d) {
+class Animal(var map: IWorldMap,var initialPosition: Vector2d) {
     private var orientation: MapDirection = MapDirection.NORTH
     private var position: Vector2d = initialPosition
     override fun toString(): String {

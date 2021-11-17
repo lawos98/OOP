@@ -1,20 +1,26 @@
-
-fun toString(arg:MoveDirection):String{
-    when (arg) {
-        MoveDirection.FORWARD -> return "zwierzak idzie do przodu"
-        MoveDirection.BACKWARD -> return "zwierzak idzie do tyłu"
-        MoveDirection.RIGHT -> return "zwierzak skręca w prawo"
-        MoveDirection.LEFT -> return "zwierzak skręca w lewo"
-    }
-}
-fun main(args: Array<String>) {
-//    var kon=Animal()
-//    var way:Array<MoveDirection> =OptionsParser().parse("frf")
-//    println(way.size)
-//    for (i in way)
-//    {
-//        kon.move(i)
-//        print(kon.showPlace())
-//        println(convertToString(i))
+//
+//fun toString(arg:MoveDirection):String{
+//    when (arg) {
+//        MoveDirection.FORWARD -> return "zwierzak idzie do przodu"
+//        MoveDirection.BACKWARD -> return "zwierzak idzie do tyłu"
+//        MoveDirection.RIGHT -> return "zwierzak skręca w prawo"
+//        MoveDirection.LEFT -> return "zwierzak skręca w lewo"
 //    }
+//}
+fun main(args: Array<String>) {
+//    val directions=OptionsParser().parse("fbrlffrrffffffff")
+//    val map:IWorldMap=RectangularMap(10,5)
+//    val positions= arrayOf(Vector2d(2,2),Vector2d(3,4))
+//    val engine:IEngine =SimulationEngine(directions,map,positions)
+//    engine.run()
+//    println(map.toString())
+
+    val directions=OptionsParser().parse("fbrlbrlbflrflrlfrlflrffrlfrlflrlffrlflrflrlflrrrffllflflrfr")
+    val map:IWorldMap=RectangularMap(15,15)
+    val positions= arrayOf(Vector2d(2,2),Vector2d(5,2),Vector2d(8,12),Vector2d(15,3),Vector2d(3,13),Vector2d(11,11),Vector2d(5,10))
+    val engine:IEngine =SimulationEngine(directions,map,positions)
+    engine.run()
+    println(map.toString())
+
+
 }
