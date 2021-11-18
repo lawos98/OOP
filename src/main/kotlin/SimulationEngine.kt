@@ -6,11 +6,9 @@ class SimulationEngine(var tabDirections: Array<MoveDirection>,var map: IWorldMa
         }
         val tab=map.animals()
         var i =0
-        println(tabDirections.size)
         for(dir in tabDirections) {
             tab[i].move(dir)
             i=(i+1)%tab.size
-            println(map.toString())
         }
     }
 }
