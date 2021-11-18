@@ -8,16 +8,9 @@
 //    }
 //}
 fun main(args: Array<String>) {
-//    val directions=OptionsParser().parse("fbrlffrrffffffff")
-//    val map:IWorldMap=RectangularMap(10,5)
-//    val positions= arrayOf(Vector2d(2,2),Vector2d(3,4))
-//    val engine:IEngine =SimulationEngine(directions,map,positions)
-//    engine.run()
-//    println(map.toString())
-
-    val directions=OptionsParser().parse("fbrlbrlbflrflrlfrlflrffrlfrlflrlffrlflrflrlflrrrffllflflrfr")
-    val map:IWorldMap=RectangularMap(15,15)
-    val positions= arrayOf(Vector2d(2,2),Vector2d(5,2),Vector2d(8,12),Vector2d(15,3),Vector2d(3,13),Vector2d(11,11),Vector2d(5,10))
+    val directions=OptionsParser().parse(args.joinToString())
+    val map:IWorldMap=RectangularMap(10,5)
+    val positions= arrayOf(Vector2d(2,2),Vector2d(3,4))
     val engine:IEngine =SimulationEngine(directions,map,positions)
     engine.run()
     println(map.toString())
