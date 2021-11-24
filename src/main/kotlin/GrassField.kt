@@ -2,17 +2,44 @@ import java.util.*
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-class GrassField(countGrass:Int) :IWorldMap,AbstractWorldMap(){
-    private var grassList = placeGrass(countGrass)
+class GrassField(private var countGrass:Int) :IWorldMap,AbstractWorldMap(){
+    private var grassList = generateGrassField(countGrass)
 
-    private fun placeGrass(countGrass: Int):LinkedList<Grass> {
+//    fun removeGrass(position: Vector2d){
+//        var i:Int=0
+//        for (grassBlock: Grass in grassList) {
+//            if (grassBlock.getPositon()==position){
+//                grassList.removeAt(i)
+//            }
+//            i+=1
+//        }
+//    }
+//
+//    fun placeGrass(){
+//        var x:Int
+//        var y:Int
+//        var rangeX:Int
+//        var rangeY:Int
+//        while(true){
+//            rangeX=sqrt(20*countGrass.toDouble()).toInt()
+//            x= Random.nextInt(-rangeX,rangeX)
+//            rangeY=sqrt((20*countGrass-x*x).toDouble()).toInt()
+//            if(rangeY==0)continue
+//            y= Random.nextInt(-rangeY,rangeY)
+//            if (objectAt(Vector2d(x,y))==null){
+//                grassList.addLast(Grass(Vector2d(x,y)))
+//                return
+//            }
+//        }
+//    }
+
+    private fun generateGrassField(countGrass: Int):LinkedList<Grass> {
         fun checkGrass(grassList:LinkedList<Grass>,position: Vector2d): Boolean {
             for (grassBlock: Grass in grassList) {
                 if (grassBlock.getPositon()==position) return false
             }
             return true
         }
-
         val grassList = LinkedList<Grass>()
         var count =0
         var x:Int
@@ -31,12 +58,18 @@ class GrassField(countGrass:Int) :IWorldMap,AbstractWorldMap(){
             }
         }
         return grassList
-
     }
 
     override fun canMoveTo(position: Vector2d): Boolean {
         if (isOccupied(position)) return false
-        return checkNear(position)
+        if(checkNear(position)){
+//            if(grassList.size>0){
+////                removeGrass(position)
+////                placeGrass()
+//            }
+            return true
+        }
+        return false
     }
 
     override fun objectAt(position: Vector2d): Any? {

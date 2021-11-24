@@ -1,8 +1,5 @@
-class Grass(var position:Vector2d) {
+class Grass(position: Vector2d):IMapElement, AbstractWorldMapElement(position) {
     override fun toString():String{
         return "ლ"
-    }
-    fun getPositon():Vector2d{
-        return position
     }
 }

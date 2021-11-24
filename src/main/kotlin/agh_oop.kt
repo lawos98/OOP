@@ -11,8 +11,8 @@ import kotlin.math.sqrt
 //}
 fun main(args: Array<String>) {
     val directions=OptionsParser().parse(args.joinToString())
-    val map:IWorldMap=GrassField(5)
-    val positions= arrayOf(Vector2d(2,2),Vector2d(3,4))
+    val map:IWorldMap=GrassField(1)
+    val positions= arrayOf(Vector2d(0,-1),Vector2d(3,4))
     val engine:IEngine =SimulationEngine(directions,map,positions)
     engine.run()
     println(map.toString())

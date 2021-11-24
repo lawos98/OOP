@@ -1,6 +1,7 @@
-class Animal(private var map: IWorldMap, initialPosition: Vector2d) {
+import kotlin.reflect.typeOf
+
+class Animal(private var map: IWorldMap, position: Vector2d):IMapElement, AbstractWorldMapElement(position) {
     private var orientation: MapDirection = MapDirection.NORTH
-    var position: Vector2d = initialPosition
     override fun toString(): String {
         return when (orientation) {
             MapDirection.NORTH -> ("⮝")
