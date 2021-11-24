@@ -39,10 +39,10 @@ class Vector2dTest {
     @Test
     fun test_upperRight()
     {
-        assertTrue(Vector2d(2, 4).uppperRight(Vector2d(4, 4))==Vector2d(4, 4))
-        assertTrue(Vector2d(3, 3).uppperRight(Vector2d(3, 3))==Vector2d(3, 3))
-        assertTrue(Vector2d(1, 5).uppperRight(Vector2d(5, 1))==Vector2d(5, 5))
-        assertTrue(Vector2d(-1, -1).uppperRight(Vector2d(1, 1))==Vector2d(1, 1))
+        assertTrue(Vector2d(2, 4).upperRight(Vector2d(4, 4))==Vector2d(4, 4))
+        assertTrue(Vector2d(3, 3).upperRight(Vector2d(3, 3))==Vector2d(3, 3))
+        assertTrue(Vector2d(1, 5).upperRight(Vector2d(5, 1))==Vector2d(5, 5))
+        assertTrue(Vector2d(-1, -1).upperRight(Vector2d(1, 1))==Vector2d(1, 1))
     }
     @Test
     fun test_lowerLeft()

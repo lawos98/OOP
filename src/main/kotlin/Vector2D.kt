@@ -8,7 +8,7 @@ class Vector2d (var x :Int, var y: Int){
     fun follows(u: Vector2d) :Boolean {
         return x >= u.x && y >= u.y
     }
-    fun uppperRight(u: Vector2d) :Vector2d {
+    fun upperRight(u: Vector2d) :Vector2d {
         return Vector2d(maxOf(x,u.x),maxOf(y,u.y))
     }
     fun lowerLeft(u: Vector2d) :Vector2d {

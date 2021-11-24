@@ -62,7 +62,7 @@ open class MapVisualizer(private val map: IWorldMap)
         map.objectAt(currentPosition)?.toString() ?: EMPTY_CELL
 
     companion object {
-        private const val EMPTY_CELL = " "
+        private const val EMPTY_CELL = "﹒"
         private const val FRAME_SEGMENT = "-"
         private const val CELL_SEGMENT = "|"
     }

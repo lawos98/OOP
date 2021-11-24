@@ -1,6 +1,6 @@
-class Animal(var map: IWorldMap,initialPosition: Vector2d) {
+class Animal(private var map: IWorldMap, initialPosition: Vector2d) {
     private var orientation: MapDirection = MapDirection.NORTH
-    private var position: Vector2d = initialPosition
+    var position: Vector2d = initialPosition
     override fun toString(): String {
         return when (orientation) {
             MapDirection.NORTH -> ("⮝")
