@@ -50,8 +50,12 @@ class GrassField(countGrass:Int) :IWorldMap,AbstractWorldMap(){
             rangeX=sqrt(20*countGrass.toDouble()).toInt()
             x= Random.nextInt(-rangeX,rangeX)
             rangeY=sqrt((20*countGrass-x*x).toDouble()).toInt()
-            if(rangeY==0)continue
-            y= Random.nextInt(-rangeY,rangeY)
+            if(rangeY==0){
+                y=0
+            }
+            else{
+                y= Random.nextInt(-rangeY,rangeY)
+            }
             if (checkGrass(grassList,Vector2d(x,y))){
                 count+=1
                 grassList.addLast(Grass(Vector2d(x,y)))
