@@ -2,13 +2,13 @@ import java.util.*
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-class GrassField(private var countGrass:Int) :IWorldMap,AbstractWorldMap(){
+class GrassField(countGrass:Int) :IWorldMap,AbstractWorldMap(){
     private var grassList = generateGrassField(countGrass)
 
 //    fun removeGrass(position: Vector2d){
 //        var i:Int=0
 //        for (grassBlock: Grass in grassList) {
-//            if (grassBlock.getPositon()==position){
+//            if (grassBlock.getPosition()==position){
 //                grassList.removeAt(i)
 //            }
 //            i+=1
@@ -83,11 +83,10 @@ class GrassField(private var countGrass:Int) :IWorldMap,AbstractWorldMap(){
     }
 
     override fun toString():String{
-        var (vectorMin,vectorMax)=edgesAnimals()
-        for(grassBlock:Grass in grassList){
-            vectorMin=vectorMin.lowerLeft(grassBlock.getPositon())
-            vectorMax=vectorMax.upperRight(grassBlock.getPositon())
-        }
+        val (vectorMinAnimal,vectorMaxAnimal)=edgesMapAnimal(animalList)
+        val (vectorMinGrass,vectorMaxGrass)=edgesMapGrass(grassList)
+        val vectorMin=vectorMinAnimal.lowerLeft(vectorMinGrass)
+        val vectorMax=vectorMaxAnimal.upperRight(vectorMaxGrass)
         return MapVisualizer(this).draw(vectorMin,vectorMax)
     }
 }

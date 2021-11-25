@@ -14,6 +14,14 @@ abstract class AbstractWorldMap:IWorldMap {
         animalList.addLast(animal)
         return true
     }
+
+//    override fun place(animal: Animal): Boolean {
+//        if(isOccupied(animal.getPositon()))return false
+//        animalList.addLast(animal)
+//        return true
+//    }
+
+
     override fun isOccupied(position: Vector2d): Boolean {
         for (creature: Animal in animalList) {
             if (creature.isAt(position)) return true
@@ -39,13 +47,21 @@ abstract class AbstractWorldMap:IWorldMap {
         }
         return false
     }
-    fun edgesAnimals():Array<Vector2d>{
+    fun edgesMapAnimal(tab: LinkedList<Animal>):Array<Vector2d>{
         var vectorMin=Vector2d(POSITIVE_INFINITY.toInt(),POSITIVE_INFINITY.toInt())
         var vectorMax=Vector2d(NEGATIVE_INFINITY.toInt(),NEGATIVE_INFINITY.toInt())
-        for(creature:Animal in animalList){
-            vectorMin=vectorMin.lowerLeft(creature.position)
-            vectorMax=vectorMax.upperRight(creature.position
-            )
+        for(block:Animal in tab){
+            vectorMin=vectorMin.lowerLeft(block.getPositon())
+            vectorMax=vectorMax.upperRight(block.getPositon())
+        }
+        return arrayOf(vectorMin,vectorMax)
+    }
+    fun edgesMapGrass(tab: LinkedList<Grass>):Array<Vector2d>{
+        var vectorMin=Vector2d(POSITIVE_INFINITY.toInt(),POSITIVE_INFINITY.toInt())
+        var vectorMax=Vector2d(NEGATIVE_INFINITY.toInt(),NEGATIVE_INFINITY.toInt())
+        for(block:Grass in tab){
+            vectorMin=vectorMin.lowerLeft(block.getPositon())
+            vectorMax=vectorMax.upperRight(block.getPositon())
         }
         return arrayOf(vectorMin,vectorMax)
     }
