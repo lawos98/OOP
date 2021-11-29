@@ -1,3 +1,5 @@
+import java.util.HashMap
+
 //
 //fun toString(arg:MoveDirection):String{
 //    when (arg) {
@@ -9,9 +11,11 @@
 //}
 fun main(args: Array<String>) {
     val directions=OptionsParser().parse(args.joinToString())
-    val map:IWorldMap=GrassField(1)
-    val positions= arrayOf(Vector2d(0,-1),Vector2d(3,4))
+    val map:IWorldMap=GrassField()
+    map.generateGrass(5)
+    val positions= arrayOf(Vector2d(0,-1),Vector2d(3,4),Vector2d(-5,-1),Vector2d(7,4),Vector2d(13,4),Vector2d(-5,-7),Vector2d(-7,-4))
     val engine:IEngine =SimulationEngine(directions,map,positions)
     engine.run()
     println(map.toString())
+
 }

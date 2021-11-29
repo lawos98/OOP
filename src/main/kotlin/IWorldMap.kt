@@ -48,4 +48,10 @@ interface IWorldMap {
      * @return List of animals.
      */
     fun animals(): List<Animal>
+
+    fun changePosition(start:Vector2d, end:Vector2d)
+
+    fun generateGrass(countGrass: Int)
+
+    fun printList()
 }

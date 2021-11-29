@@ -1,17 +1,42 @@
+import kotlin.random.Random
 
 class RectangularMap(private var width: Int, private var height: Int):IWorldMap,AbstractWorldMap() {
 
     override fun canMoveTo(position: Vector2d): Boolean {
-        if (!(position.follows(Vector2d(0, 0)) && position.precedes(Vector2d(width, height))) || isOccupied(position)) return false
-        return checkNear(position)
+        if(isOccupied(position))return false
+        return (position.follows(Vector2d(0, 0)) && position.precedes(Vector2d(width, height)))
+                || isOccupied(position+Vector2d(0,1))
+                || isOccupied(position+Vector2d(1,0))
+                || isOccupied(position+Vector2d(-1,0))
+                || isOccupied(position+Vector2d(0,-1))
     }
 
-    override fun objectAt(position: Vector2d): Any? {
-        for (creature: Animal in animalList) {
-            if (creature.isAt(position)) return creature
+    override fun generateGrass(countGrass: Int){
+        var count=0
+        var x:Int
+        var y:Int
+        var cell:Field
+        while (count<countGrass){
+            x= Random.nextInt(0,width)
+            y=Random.nextInt(0,height)
+            if (fieldList.containsKey(Vector2d(x,y))){
+                if(fieldList[Vector2d(x,y)]!!.isItGrass()){
+                    continue
+                }
+                else{
+                    count+=1
+                    fieldList[Vector2d(x,y)]!!.placeGrass(Grass(Vector2d(x,y)))
+                }
+            }
+            else{
+                count+=1
+                cell=Field()
+                cell.placeGrass(Grass(Vector2d(x,y)))
+                fieldList[Vector2d(x,y)] = cell
+            }
         }
-        return null
     }
+
     override fun toString():String{
         return MapVisualizer(this).draw(Vector2d(0,0),Vector2d(width,height))
     }
