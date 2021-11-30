@@ -50,7 +50,9 @@ abstract class AbstractWorldMap:IWorldMap {
         return false
     }
     override fun changePosition(start:Vector2d, end:Vector2d){
-        val creature=fieldList[start]!!.moveAnimal()
+        val creature=fieldList[start]!!.getAnimal()
+        fieldList[start]?.moveAnimal()
+        println(creature?.getPositon().toString())
         if(!fieldList[start]!!.isItGrass()) {
             fieldList.remove(start)
         }

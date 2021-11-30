@@ -10,12 +10,10 @@ import java.util.HashMap
 //    }
 //}
 fun main(args: Array<String>) {
-    val directions=OptionsParser().parse(args.joinToString())
-    val map:IWorldMap=GrassField()
-    map.generateGrass(5)
-    val positions= arrayOf(Vector2d(0,-1),Vector2d(3,4),Vector2d(-5,-1),Vector2d(7,4),Vector2d(13,4),Vector2d(-5,-7),Vector2d(-7,-4))
+    val directions=OptionsParser().parse("ffffffffffffffffffffffff")
+    val map:IWorldMap=RectangularMap(10,5)
+    val positions= arrayOf(Vector2d(2,0),Vector2d(3,0),Vector2d(0,0),Vector2d(10,0))
     val engine:IEngine =SimulationEngine(directions,map,positions)
     engine.run()
-    println(map.toString())
 
 }

@@ -39,7 +39,10 @@ class GrassField :IWorldMap,AbstractWorldMap(){
     }
     override fun canMoveTo(position: Vector2d): Boolean {
         if(isOccupied(position))return false
-        return isOccupied(position+Vector2d(0,1))||isOccupied(position+Vector2d(1,0))||isOccupied(position+Vector2d(-1,0))||isOccupied(position+Vector2d(0,-1))
+        return isOccupied(position+Vector2d(0,1))
+                ||isOccupied(position+Vector2d(1,0))
+                ||isOccupied(position+Vector2d(-1,0))
+                ||isOccupied(position+Vector2d(0,-1))
         }
 
     override fun toString():String{

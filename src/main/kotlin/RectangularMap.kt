@@ -5,10 +5,10 @@ class RectangularMap(private var width: Int, private var height: Int):IWorldMap,
     override fun canMoveTo(position: Vector2d): Boolean {
         if(isOccupied(position))return false
         return (position.follows(Vector2d(0, 0)) && position.precedes(Vector2d(width, height)))
-                || isOccupied(position+Vector2d(0,1))
+                &&(isOccupied(position+Vector2d(0,1))
                 || isOccupied(position+Vector2d(1,0))
                 || isOccupied(position+Vector2d(-1,0))
-                || isOccupied(position+Vector2d(0,-1))
+                || isOccupied(position+Vector2d(0,-1)))
     }
 
     override fun generateGrass(countGrass: Int){

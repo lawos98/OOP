@@ -13,7 +13,7 @@ class Field {
         return temp
     }
     fun removeGrass(){
-        inAnimal=null
+        inGrass=null
     }
     fun isItAnimal():Boolean{
         return inAnimal!=null
