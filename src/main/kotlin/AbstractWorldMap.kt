@@ -15,14 +15,17 @@ abstract class AbstractWorldMap:IWorldMap {
     override fun place(animal: Animal): Boolean {
         val vAnimal=animal.getPositon()
         if (fieldList.containsKey(vAnimal)){
-            return if(fieldList[vAnimal]!!.isItAnimal()) {
-                false
-            } else{
-                if(fieldList[vAnimal]!!.isItGrass()){
-                    fieldList[vAnimal]!!.removeGrass()
+            val field = fieldList[vAnimal]
+            if(field != null) {
+                return if (field.isItAnimal()) {
+                    false
+                } else {
+                    if (field.isItGrass()) {
+                        field.removeGrass()
+                    }
+                    fieldList[vAnimal]!!.placeAnimal(animal)
+                    true
                 }
-                fieldList[vAnimal]!!.placeAnimal(animal)
-                true
             }
         }
         else{
