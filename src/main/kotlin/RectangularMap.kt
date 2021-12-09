@@ -1,6 +1,6 @@
 import kotlin.random.Random
 
-class RectangularMap(private var width: Int, private var height: Int):IWorldMap,AbstractWorldMap() {
+class RectangularMap(var width: Int,var height: Int):AbstractWorldMap() {
 
     override fun canMoveTo(position: Vector2d): Boolean {
         if(isOccupied(position))return false
@@ -26,6 +26,7 @@ class RectangularMap(private var width: Int, private var height: Int):IWorldMap,
                 else{
                     count+=1
                     fieldList[Vector2d(x,y)]!!.placeGrass(Grass(Vector2d(x,y)))
+                    this.addToBoundary(Vector2d(x,y))
                 }
             }
             else{
@@ -33,6 +34,7 @@ class RectangularMap(private var width: Int, private var height: Int):IWorldMap,
                 cell=Field()
                 cell.placeGrass(Grass(Vector2d(x,y)))
                 fieldList[Vector2d(x,y)] = cell
+                this.addToBoundary(Vector2d(x,y))
             }
         }
     }

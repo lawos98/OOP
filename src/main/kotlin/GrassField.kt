@@ -3,7 +3,8 @@ import java.lang.Double.POSITIVE_INFINITY
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-class GrassField :IWorldMap,AbstractWorldMap(){
+class GrassField :AbstractWorldMap(){
+
     override fun generateGrass(countGrass: Int){
         var count=0
         var x:Int
@@ -27,6 +28,7 @@ class GrassField :IWorldMap,AbstractWorldMap(){
                 else{
                     count+=1
                     fieldList[Vector2d(x,y)]!!.placeGrass(Grass(Vector2d(x,y)))
+                    this.addToBoundary(Vector2d(x,y))
                 }
             }
             else{
@@ -34,6 +36,7 @@ class GrassField :IWorldMap,AbstractWorldMap(){
                 cell=Field()
                 cell.placeGrass(Grass(Vector2d(x,y)))
                 fieldList[Vector2d(x,y)] = cell
+                this.addToBoundary(Vector2d(x,y))
             }
         }
     }
@@ -46,12 +49,9 @@ class GrassField :IWorldMap,AbstractWorldMap(){
         }
 
     override fun toString():String{
-        var vectorMin=Vector2d(POSITIVE_INFINITY.toInt(),POSITIVE_INFINITY.toInt())
-        var vectorMax=Vector2d(NEGATIVE_INFINITY.toInt(),NEGATIVE_INFINITY.toInt())
-        for(key in fieldList.keys){
-            vectorMin=vectorMin.lowerLeft(key)
-            vectorMax=vectorMax.upperRight(key)
-        }
+        var vectorMin=leftCorner()
+        var vectorMax=rightCorner()
         return MapVisualizer(this).draw(vectorMin,vectorMax)
     }
 }
+

@@ -1,6 +1,8 @@
 
 class Animal(private var map: IWorldMap, position: Vector2d):IMapElement, AbstractWorldMapElement(position) {
     private var orientation: MapDirection = MapDirection.NORTH
+    private var observers= mutableListOf<IPositionChangeObserver>()
+
     override fun toString(): String {
         return when (orientation) {
             MapDirection.NORTH -> ("⮝")
@@ -27,5 +29,17 @@ class Animal(private var map: IWorldMap, position: Vector2d):IMapElement, Abstra
             MoveDirection.RIGHT -> orientation = orientation.next()
 
         }
+    }
+    fun addObserver(Observer:IPositionChangeObserver){
+        observers.add(Observer)
+    }
+    fun removeObserver(Observer:IPositionChangeObserver){
+        observers.remove(Observer)
+    }
+    fun notifyObservers(start:Vector2d,end:Vector2d){
+        for(obs in observers){
+            obs.changePosition(start,end)
+        }
+
     }
 }

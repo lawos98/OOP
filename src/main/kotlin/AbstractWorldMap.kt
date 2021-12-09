@@ -1,87 +1,131 @@
-abstract class AbstractWorldMap:IWorldMap {
-    var fieldList=HashMap<Vector2d,Field>()
+import java.util.*
+import kotlin.collections.HashMap
 
-    override fun printList(){
-        for(key in fieldList.keys) {
-            print(key.x)
-            print(" ")
-            print(key.y)
-            print(" zwierze: ")
-            print(fieldList[key]!!.isItAnimal())
-            print(" trawa: ")
-            println(fieldList[key]!!.isItGrass())
-        }
+abstract class AbstractWorldMap:IWorldMap,IPositionChangeObserver{
+    override var fieldList=HashMap<Vector2d,Field>()
+    val listXMin=PriorityQueue(ComparatorXMin)
+    val listXMax=PriorityQueue(ComparatorXMax)
+    val listYMax=PriorityQueue(ComparatorYMin)
+    val listYMin=PriorityQueue(ComparatorYMax)
+
+    override fun addToBoundary(v:Vector2d){
+        listXMin.add(v)
+        listXMax.add(v)
+        listYMin.add(v)
+        listYMax.add(v)
     }
-    override fun place(animal: Animal): Boolean {
+    override fun changeBoundary(start:Vector2d,end:Vector2d){
+        removeBoundary(start)
+        addToBoundary(end)
+    }
+
+    override fun removeBoundary(v: Vector2d) {
+        listXMin.remove(v)
+        listXMax.remove(v)
+        listYMin.remove(v)
+        listYMax.remove(v)
+    }
+
+    override fun leftCorner():Vector2d{
+        return Vector2d(listXMin.peek().x,listYMin.peek().y)
+    }
+    override fun rightCorner():Vector2d {
+        return Vector2d(listXMax.peek().x,listYMax.peek().y)
+    }
+
+    override fun place(animal: Animal){
         val vAnimal=animal.getPositon()
         if (fieldList.containsKey(vAnimal)){
             val field = fieldList[vAnimal]
             if(field != null) {
-                return if (field.isItAnimal()) {
-                    false
+                if(field.isItAnimal()) {
+                    throw IllegalArgumentException(vAnimal.toString() + "at position can't place animal")
                 } else {
-                    if (field.isItGrass()) {
+                    if (field.isItGrass()){
+                        this.removeBoundary(animal.getPositon())
                         field.removeGrass()
                     }
-                    fieldList[vAnimal]!!.placeAnimal(animal)
-                    true
+                    field.placeAnimal(animal)
+                    this.addToBoundary(animal.getPositon())
                 }
             }
         }
-        else{
-            val cell=Field()
-            cell.placeAnimal(animal)
-            fieldList[vAnimal] = cell
-            return true
-        }
+        val cell=Field()
+        cell.placeAnimal(animal)
+        fieldList[vAnimal] = cell
+        this.addToBoundary(animal.getPositon())
     }
 
     override fun objectAt(position: Vector2d): Any? {
-        if (fieldList.containsKey((position))){
-            if(fieldList[position]!!.isItAnimal()){
-                return fieldList[position]!!.getAnimal()
+        if (fieldList.containsKey((position))) {
+            val field = fieldList[position]
+            if (field != null) {
+                if (field.isItAnimal()) return field.getAnimal()
+                return field.getGrass()
             }
-            return fieldList[position]!!.getGrass()
         }
         return null
     }
 
     override fun isOccupied(position: Vector2d): Boolean {
         if(fieldList.containsKey(position)){
-            return fieldList[position]!!.isItAnimal()
+            val field=fieldList[position]
+            if(field!=null){
+                return field.isItAnimal()
+            }
         }
         return false
     }
-    override fun changePosition(start:Vector2d, end:Vector2d){
-        val creature=fieldList[start]!!.getAnimal()
-        fieldList[start]?.moveAnimal()
-        println(creature?.getPositon().toString())
-        if(!fieldList[start]!!.isItGrass()) {
-            fieldList.remove(start)
-        }
-        if(fieldList.containsKey(end)){
-            if (creature != null) {
-                fieldList[end]!!.placeAnimal(creature)
+    override fun changePosition(start:Vector2d, end:Vector2d) {
+        if (fieldList.containsKey(start)){
+            val fieldStart=fieldList[start]
+            if (fieldStart!=null) {
+                val creature=fieldStart.moveAnimal()
+                if (!fieldStart.isItGrass()) {
+                    fieldList.remove(start)
+                }
+                if (fieldList.containsKey(end)) {
+                    val fieldEnd=fieldList[end]
+                    if(fieldEnd!=null){
+                        if (creature != null) {
+                            fieldEnd.placeAnimal(creature)
+                            this.changeBoundary(start,end)
+                        }
+                        if(fieldEnd.isItGrass()){
+                            fieldEnd.removeGrass()
+                            generateGrass(1)
+                        }
+                    }
+                }
+                else {
+                    val cell = Field()
+                    if (creature != null) {
+                        cell.placeAnimal(creature)
+                    }
+                    fieldList[end] = cell
+                    this.changeBoundary(start,end)
+                }
             }
-            if(fieldList[end]!!.isItGrass()){
-                fieldList[end]!!.removeGrass()
-                generateGrass(1)
-            }
         }
-        else {
-            val cell = Field()
-            if (creature != null) {
-                cell.placeAnimal(creature)
-            }
-            fieldList[end] = cell
         }
-    }
 
     override fun animals(): List<Animal> {
+        fun checkAnimal(any: Any?):Animal?{
+            if(fieldList.containsKey(any)) {
+                val field = fieldList[any]
+                if(field!=null){
+                    if(field.isItAnimal())
+                        return field.getAnimal()
+                }
+            }
+            return null
+        }
         val tab= arrayListOf<Animal>()
+        var animalToAdd: Animal?
         for (key in fieldList.keys){
-            if(fieldList[key]!!.isItAnimal()){
-                fieldList[key]?.getAnimal()?.let { tab.add(it) }
+            animalToAdd=checkAnimal(key)
+            if(animalToAdd!=null){
+                tab.add(animalToAdd)
             }
         }
         return tab

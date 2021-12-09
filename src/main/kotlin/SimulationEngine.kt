@@ -9,8 +9,6 @@ class SimulationEngine(private var tabDirections: Array<MoveDirection>, private 
         for(dir in tabDirections) {
             tab[i].move(dir)
             i=(i+1)%tab.size
-            println(map.toString())
-            map.printList()
         }
     }
 }

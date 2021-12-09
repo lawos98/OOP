@@ -5,6 +5,8 @@
  * @author apohllo
  */
 interface IWorldMap {
+
+    var fieldList:HashMap<Vector2d,Field>
     /**
      * Indicate if any object can move to the given position.
      *
@@ -21,7 +23,7 @@ interface IWorldMap {
      * The animal to place on the map.
      * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
      */
-    fun place(animal: Animal): Boolean
+    fun place(animal: Animal)
     /**
      * Return true if given position on the map is occupied. Should not be
      * confused with canMove since there might be empty positions where the animal
@@ -53,5 +55,15 @@ interface IWorldMap {
 
     fun generateGrass(countGrass: Int)
 
-    fun printList()
+    fun addToBoundary(v:Vector2d)
+
+    fun changeBoundary(start:Vector2d,end:Vector2d)
+
+    fun removeBoundary(v:Vector2d)
+
+    fun leftCorner():Vector2d
+
+    fun rightCorner():Vector2d
+
+
 }

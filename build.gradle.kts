@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.31"
-    application
+    kotlin("jvm") version "1.6.0"
+    id("org.openjfx.javafxplugin") version "0.0.10"
 }
 
 group = "me.lawos"
@@ -12,9 +12,13 @@ repositories {
     mavenCentral()
 }
 
+javafx {
+    version = "17"
+    modules = listOf("javafx.controls")
+}
+
 dependencies {
-    implementation("org.junit.jupiter:junit-jupiter:5.7.0")
-    implementation("org.testng:testng:7.1.0")
+    testImplementation(kotlin("test"))
 }
 
 tasks.test {
@@ -23,8 +27,4 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-application {
-    mainClass.set("agh.ics.oop.World")
 }
