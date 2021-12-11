@@ -10,7 +10,7 @@ import javafx.stage.Stage
 import kotlin.math.abs
 
 
-class HelloApplication: Application(){
+class GUI: Application(){
     override fun start(stage:Stage){
         fun addToGrid(text:String,grid:GridPane,indexX:Int,indexY:Int){
             val cellWidth=30.0
