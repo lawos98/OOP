@@ -18,6 +18,7 @@ javafx {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC2")
     testImplementation(kotlin("test"))
 }
 

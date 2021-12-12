@@ -1,3 +1,5 @@
+import java.util.concurrent.ConcurrentHashMap
+
 /**
  * The interface responsible for interacting with the map of the world.
  * Assumes that Vector2d and MoveDirection classes are defined.
@@ -6,7 +8,7 @@
  */
 interface IWorldMap {
 
-    var fieldList:HashMap<Vector2d,Field>
+    var fieldList:ConcurrentHashMap<Vector2d,Field>
     /**
      * Indicate if any object can move to the given position.
      *

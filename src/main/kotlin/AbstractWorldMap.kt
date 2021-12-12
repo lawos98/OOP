@@ -1,8 +1,9 @@
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.collections.HashMap
 
 abstract class AbstractWorldMap:IWorldMap,IPositionChangeObserver{
-    override var fieldList=HashMap<Vector2d,Field>()
+    override var fieldList=ConcurrentHashMap<Vector2d,Field>()
     val listXMin=PriorityQueue(ComparatorXMin)
     val listXMax=PriorityQueue(ComparatorXMax)
     val listYMax=PriorityQueue(ComparatorYMin)
@@ -103,7 +104,7 @@ abstract class AbstractWorldMap:IWorldMap,IPositionChangeObserver{
                         cell.placeAnimal(creature)
                     }
                     fieldList[end] = cell
-                    this.changeBoundary(start,end)
+                    this.addToBoundary(start)
                 }
             }
         }

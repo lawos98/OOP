@@ -1,3 +1,4 @@
+import java.io.FileInputStream
 
 class Animal(private var map: IWorldMap, position: Vector2d):IMapElement, AbstractWorldMapElement(position) {
     private var orientation: MapDirection = MapDirection.NORTH
@@ -40,6 +41,14 @@ class Animal(private var map: IWorldMap, position: Vector2d):IMapElement, Abstra
         for(obs in observers){
             obs.changePosition(start,end)
         }
+    }
 
+    override fun getPath(): FileInputStream {
+        when(orientation){
+            MapDirection.NORTH -> return FileInputStream("src/main/kotlin/Resource/up.png")
+            MapDirection.SOUTH -> return FileInputStream("src/main/kotlin/Resource/down.png")
+            MapDirection.EAST -> return FileInputStream("src/main/kotlin/Resource/right.png")
+            MapDirection.WEST -> return FileInputStream("src/main/kotlin/Resource/left.png")
+        }
     }
 }

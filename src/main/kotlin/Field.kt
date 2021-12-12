@@ -27,6 +27,10 @@ class Field {
     fun getGrass(): Grass? {
         return inGrass
     }
+    fun getObject():Any?{
+        if(inAnimal!=null)return inAnimal
+        return inGrass
+    }
     override fun toString():String{
         if(inAnimal!=null)return inAnimal.toString()
         if(inGrass!=null)return inGrass.toString()
