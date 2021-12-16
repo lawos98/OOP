@@ -1,3 +1,4 @@
+import utilities.Vector2d
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -7,10 +8,10 @@ class Vector2dTest {
     @Test
     fun test_isequals()
     {
-        assertTrue(Vector2d(2, 4)== (Vector2d(2, 4)))
-        assertTrue(Vector2d(3, 5)==(Vector2d(3, 5)))
-        assertFalse(Vector2d(2, 5)==(Vector2d(2, 3)))
-        assertFalse(Vector2d(3, 4)==(Vector2d(2, 4)))
+        assertTrue(Vector2d(2, 4) == (Vector2d(2, 4)))
+        assertTrue(Vector2d(3, 5) ==(Vector2d(3, 5)))
+        assertFalse(Vector2d(2, 5) ==(Vector2d(2, 3)))
+        assertFalse(Vector2d(3, 4) ==(Vector2d(2, 4)))
     }
     @Test
     fun test_convertToString()
@@ -39,18 +40,18 @@ class Vector2dTest {
     @Test
     fun test_upperRight()
     {
-        assertTrue(Vector2d(2, 4).upperRight(Vector2d(4, 4))==Vector2d(4, 4))
-        assertTrue(Vector2d(3, 3).upperRight(Vector2d(3, 3))==Vector2d(3, 3))
-        assertTrue(Vector2d(1, 5).upperRight(Vector2d(5, 1))==Vector2d(5, 5))
-        assertTrue(Vector2d(-1, -1).upperRight(Vector2d(1, 1))==Vector2d(1, 1))
+        assertTrue(Vector2d(2, 4).upperRight(Vector2d(4, 4))== Vector2d(4, 4))
+        assertTrue(Vector2d(3, 3).upperRight(Vector2d(3, 3))== Vector2d(3, 3))
+        assertTrue(Vector2d(1, 5).upperRight(Vector2d(5, 1))== Vector2d(5, 5))
+        assertTrue(Vector2d(-1, -1).upperRight(Vector2d(1, 1))== Vector2d(1, 1))
     }
     @Test
     fun test_lowerLeft()
     {
-        assertTrue(Vector2d(2, 4).lowerLeft(Vector2d(4, 4))==Vector2d(2, 4))
-        assertTrue(Vector2d(3, 3).lowerLeft(Vector2d(3, 3))==Vector2d(3, 3))
-        assertTrue(Vector2d(1, 5).lowerLeft(Vector2d(5, 1))==Vector2d(1, 1))
-        assertTrue(Vector2d(-1, -1).lowerLeft(Vector2d(1, 1))==Vector2d(-1, -1))
+        assertTrue(Vector2d(2, 4).lowerLeft(Vector2d(4, 4))== Vector2d(2, 4))
+        assertTrue(Vector2d(3, 3).lowerLeft(Vector2d(3, 3))== Vector2d(3, 3))
+        assertTrue(Vector2d(1, 5).lowerLeft(Vector2d(5, 1))== Vector2d(1, 1))
+        assertTrue(Vector2d(-1, -1).lowerLeft(Vector2d(1, 1))== Vector2d(-1, -1))
     }
     @Test
     fun test_add()
@@ -63,10 +64,10 @@ class Vector2dTest {
     @Test
     fun test_subtract()
     {
-        assertTrue(Vector2d(2, 4)-(Vector2d(4, 4))==(Vector2d(-2, 0)))
-        assertTrue(Vector2d(3, 3)-(Vector2d(3, 3))==(Vector2d(0, 0)))
-        assertTrue(Vector2d(1, 5)-(Vector2d(5, 1))==(Vector2d(-4, 4)))
-        assertTrue(Vector2d(-1, -1)-(Vector2d(1, 1))==(Vector2d(-2, -2)))
+        assertTrue(Vector2d(2, 4) -(Vector2d(4, 4))==(Vector2d(-2, 0)))
+        assertTrue(Vector2d(3, 3) -(Vector2d(3, 3))==(Vector2d(0, 0)))
+        assertTrue(Vector2d(1, 5) -(Vector2d(5, 1))==(Vector2d(-4, 4)))
+        assertTrue(Vector2d(-1, -1) -(Vector2d(1, 1))==(Vector2d(-2, -2)))
     }
     @Test
     fun test_opposite()
