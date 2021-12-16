@@ -6,15 +6,10 @@ import utilities.MapVisualizer
 import utilities.Vector2d
 import kotlin.random.Random
 
-class RectangularMap(var width: Int,var height: Int): AbstractWorldMap() {
+class RectangularMap(private var width: Int, private var height: Int): AbstractWorldMap() {
 
     override fun canMoveTo(position: Vector2d): Boolean {
-        if(isOccupied(position))return false
-        return (position.follows(Vector2d(0, 0)) && position.precedes(Vector2d(width, height)))
-                &&(isOccupied(position+ Vector2d(0, 1))
-                || isOccupied(position+ Vector2d(1, 0))
-                || isOccupied(position+ Vector2d(-1, 0))
-                || isOccupied(position+ Vector2d(0, -1)))
+        return isOccupied(position)&&position.precedes(Vector2d(width,height))&&position.follows(Vector2d(0,0))
     }
 
     override fun generateGrass(countGrass: Int){
@@ -26,13 +21,16 @@ class RectangularMap(var width: Int,var height: Int): AbstractWorldMap() {
             x= Random.nextInt(0,width)
             y=Random.nextInt(0,height)
             if (fieldList.containsKey(Vector2d(x, y))){
-                if(fieldList[Vector2d(x, y)]!!.isItGrass()){
-                    continue
-                }
-                else{
-                    count+=1
-                    fieldList[Vector2d(x, y)]!!.placeGrass(Grass(Vector2d(x, y)))
-                    this.addToBoundary(Vector2d(x, y))
+                val field=fieldList[Vector2d(x,y)]
+                if(field!=null) {
+
+                    if (field.isItGrass()) {
+                        continue
+                    } else {
+                        count += 1
+                        field.placeGrass(Grass(Vector2d(x, y)))
+                        this.addToBoundary(Vector2d(x, y))
+                    }
                 }
             }
             else{

@@ -14,7 +14,7 @@ class OptionsParser {
                 }
                 tab += MoveDirection.valueOf(value)
             } else {
-                throw IllegalArgumentException(i + " is not legal move specification")
+                throw IllegalArgumentException("$i is not legal move specification")
             }
         }
         return tab

@@ -5,7 +5,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.javafx.JavaFx
 
 
-class SimulationEngine(private var tabDirections: Array<MoveDirection>, private var map:world.IWorldMap, private var tabVectors:ArrayList<Vector2d>, private var grid:gui.GuiGrid,private var moveSpeed:Long):IEngine {
+
+class SimulationEngine(private var tabDirections: Array<MoveDirection>, private var map:world.IWorldMap, private var tabVectors:ArrayList<Vector2d>, private var grid:gui.GuiGrid, private var moveSpeed:Long):IEngine {
     override fun run() {
         GlobalScope.launch(Dispatchers.JavaFx) {
             for (position in tabVectors) {

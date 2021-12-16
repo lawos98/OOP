@@ -45,12 +45,8 @@ class GrassField : AbstractWorldMap(){
         }
     }
     override fun canMoveTo(position: Vector2d): Boolean {
-        if(isOccupied(position))return false
-        return isOccupied(position+ Vector2d(0, 1))
-                ||isOccupied(position+ Vector2d(1, 0))
-                ||isOccupied(position+ Vector2d(-1, 0))
-                ||isOccupied(position+ Vector2d(0, -1))
-        }
+        return isOccupied(position)
+    }
 
     override fun toString():String{
         val vectorMin=leftCorner()
